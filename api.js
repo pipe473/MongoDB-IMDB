@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 
 let Profesional = require("./Professional");
 let Peli = require("./Pelicula");
+let Actors = require("./actorsFunctions");
 
 let mongoose = require("mongoose");
 
@@ -81,6 +82,14 @@ let movieDocument = new Peli({
 
 app.get('/', (req, res) => {
     res.send('Hola desde mi página principal!');
+  });
+
+  app.get('/', (req, res) => {
+    res.send('Hola desde mi página principal!');
+  });
+
+  app.post('/actors', (req, res) => {
+    Actors.subidaFotos(req.body.name, req.body.url, req.body.title, req.body.description, res)
   });
 
 const PORT = process.env.PORT || 8080;
