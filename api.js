@@ -2,7 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 
 // let Peli = require("./Pelicula");
-const Actors = require("./actorsFunctions");
+const Professional = require("./professionalsFunctions");
 let mongoose = require("mongoose");
 
 const app = express();
@@ -15,7 +15,7 @@ mongoose.connect("mongodb://localhost:27017/imdb", {
   useUnifiedTopology: true,
 });
 
-// CREANDO PELICULA
+// TEST PARA CREAR PELICULA
 
 // let movieDocument = new Peli({
 //   picture: "first",
@@ -50,8 +50,8 @@ app.get("/", (req, res) => {
   res.send("Hola desde mi página principal!");
 });
 
-app.post("/actors", (req, res) => {
-  Actors.actorPushAction(
+app.post("/professionals", (req, res) => {
+  Professional.actorActionPush(
     req.body.picture,
     req.body.name,
     req.body.age,
@@ -68,6 +68,54 @@ app.post("/actors", (req, res) => {
     res
   );
 });
+
+app.get("/profesionales/id", (req, res) => {
+  Professional.getProfessionalsById(res, req.query.id);
+});
+
+app.get("/profesionales", (req, res) => {
+  Professional.getProfessionals(res);
+});
+
+app.put("/profesional", (req, res) => {
+  Professional.updateProfessional(
+    req.body._id,
+    req.body.picture,
+    req.body.name,
+    req.body.age,
+    req.body.genre,
+    req.body.weight,
+    req.body.height,
+    req.body.hairColor,
+    req.body.eyeColor,
+    req.body.race,
+    req.body.isRetired,
+    req.body.nationality,
+    req.body.oscarsNumber,
+    req.body.profession,
+    res
+  );
+});
+
+app.delete("/profesional", (req, res) => {
+  Professional.removeProfessional(
+    req.body._id,
+    req.body.picture,
+    req.body.name,
+    req.body.age,
+    req.body.genre,
+    req.body.weight,
+    req.body.height,
+    req.body.hairColor,
+    req.body.eyeColor,
+    req.body.race,
+    req.body.isRetired,
+    req.body.nationality,
+    req.body.oscarsNumber,
+    req.body.profession,
+    res
+  );
+})
 
 const PORT = process.env.PORT || 8080;
 
